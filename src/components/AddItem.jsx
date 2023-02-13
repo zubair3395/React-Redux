@@ -1,10 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import Navbar from './Navbar'
-
-function AddItem(props) {
-  console.log("Props in AddItem: ", props.data)
-  // const element= props.data
+import { useSelector } from 'react-redux'
+function AddItem() {
+  const data= useSelector(state=>  state.cartItem)
   return (
     <>
     <Navbar/>
@@ -12,7 +10,7 @@ function AddItem(props) {
 
       <h1>You Hava Add these Items</h1>
       <div className="row">
-          { props.data ? props.data.map((element, index)=>
+          { data.length>0  ? data.map((element, index)=>
           <div className="col-md-4 my-3">
               <div className="card" style={{width: "18rem"}}>
               <img src={element.avatar_url} className="card-img-top" alt="..."/>
@@ -30,9 +28,4 @@ function AddItem(props) {
     </>
   )
 }
-const stateMapToProps = (state)=>{
-  return{
-    data: state.cartItem
-  }
-}
-export default connect(stateMapToProps)(AddItem)
+export default (AddItem)
